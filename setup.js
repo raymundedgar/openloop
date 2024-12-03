@@ -31,7 +31,7 @@ const loginUser = async (email, password) => {
         const loginData = await loginResponse.json();
         const accessToken = loginData.data.accessToken;
         logger('Login successful get Token:', 'success', accessToken);
-        
+
         fs.writeFileSync('token.txt', accessToken + '\n', 'utf8');
         logger('Access token saved to token.txt');
     } catch (error) {
@@ -44,7 +44,7 @@ const registerUser = async () => {
         const email = await askQuestion('Enter your email: ');
         const name = email;
         const password = await askQuestion('Enter your password: ');
-        const inviteCode = 'ol41fe134b'; 
+        const inviteCode = 'ol3d2992c7';
 
         const registrationPayload = { name, username: email, password, inviteCode };
         const registerResponse = await fetch('https://api.openloop.so/users/register', {
