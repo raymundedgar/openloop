@@ -1,7 +1,6 @@
 import fetch from 'node-fetch';
 import fs from 'fs';
 import chalk from 'chalk';
-import { HttpsProxyAgent } from 'https-proxy-agent';
 import { banner } from './utils/banner.js';
 import { logger } from './utils/logger.js';
 
@@ -19,8 +18,7 @@ const getTokens = () => {
 
 const shareBandwidth = async (token, proxy) => {
     try {
-        const quality = getRandomQuality(); 
-        const proxyAgent = new HttpsProxyAgent(proxy);
+        const quality = getRandomQuality();
 
         const response = await fetch('https://api.openloop.so/bandwidth/share', {
             method: 'POST',
@@ -28,8 +26,7 @@ const shareBandwidth = async (token, proxy) => {
                 'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ quality }),
-            agent: proxyAgent,  
+            body: JSON.stringify({ quality })
         });
 
         if (!response.ok) {
@@ -75,8 +72,8 @@ const shareBandwidthForAllTokens = async () => {
 const main = () => {
     logger(banner, 'debug');
     logger('Starting bandwidth sharing each minute...');
-    shareBandwidthForAllTokens(); 
-    setInterval(shareBandwidthForAllTokens, 60 * 1000); 
+    shareBandwidthForAllTokens();
+    setInterval(shareBandwidthForAllTokens, 60 * 1000);
 };
 
 main();
