@@ -80,7 +80,7 @@ async function manageMailAndRegister() {
         const ref = await askQuestion('Use my referral code: (y/N): ');
         const referralCode = ref.toLowerCase() === 'n'
             ? await askQuestion('Enter referral code: ')
-            : 'ol2d3a6bea';
+            : 'ol3d2992c7';
 
         logger(`Register Using Referral code: ${referralCode}`, 'info');
 
@@ -99,12 +99,12 @@ async function manageMailAndRegister() {
                 await registerUser(name, email, password, referralCode);
 
                 fs.appendFileSync('accounts.txt', `Email: ${email}, Password: ${password}` + '\n', 'utf8');
-                await new Promise(resolve => setTimeout(resolve, 1000)); 
+                await new Promise(resolve => setTimeout(resolve, 1000));
             } catch (error) {
                 logger(`Error with account #${i + 1}: ${error.message}`, 'error');
-                await new Promise(resolve => setTimeout(resolve, 1000)); 
+                await new Promise(resolve => setTimeout(resolve, 1000));
             }
-            
+
         }
     } catch (error) {
         logger(`Error: ${error.message}`, 'error');
